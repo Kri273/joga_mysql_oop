@@ -9,7 +9,7 @@ class BaseSQLModel {
         return new Promise((resolve, reject) => {
             conn.query(query, params, (error, results) => {
                 if (error) {
-                    rejct(error);
+                    reject(error);
                 } else {
                     resolve(results);
                 }
@@ -28,11 +28,17 @@ class BaseSQLModel {
         const results = await this.executeQuery(query, [id])
         return results[0]
     }
-    
+
     async findOne(where, value) {
         const query = `SELECT * FROM ${this.tableName} WHERE ${where}="${value}"`
         const results = await this.executeQuery(query, [where, value])
         return results[0]
+    }
+
+    async findMany(where, value) {
+        const query = `SELECT * FROM ${this.tableName} WHERE ${where}="${value}"`
+        const results = await this.executeQuery(query, [where, value])
+        return results
     }
 
     async create(data) {
