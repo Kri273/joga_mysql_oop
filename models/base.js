@@ -43,19 +43,19 @@ class BaseSQLModel {
 
     async create(data) {
         const query = `INSERT INTO ${this.tableName} SET ?`
-        const results = await this.executeQuery(query, data)
+        const result = await this.executeQuery(query, data)
         return result.insertId
     }
 
     async update(id, data) {
         const query = `UPDATE ${this.tableName} SET ? WHERE id = ?`
-        const results = await this.executeQuery(query, [data, id])
+        const result = await this.executeQuery(query, [data, id])
         return result.affectedRows
     }
 
     async delete(id) {
         const query = `DELETE FROM ${this.tableName} WHERE id = ?`
-        const results = await this.executeQuery(query, [id])
+        const result = await this.executeQuery(query, [id])
         return result.affectedRows
     }
 }
